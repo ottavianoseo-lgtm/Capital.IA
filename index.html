@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Capital.IA · Semana al 2025-09-22</title>
+  <meta name="description" content="Capital.IA — Revista semanal neutral y profesional sobre IA, tecnología, finanzas y cripto. Edición 2025-09-22.">
+  <style>
+    /* ====== Design System (robusto y sin solapamientos) ====== */
+    :root {
+      --bg: #0b0f1e;
+      --surface: #141a2f;
+      --ink: #e9edff;
+      --muted: #9aa4c3;
+      --lead: #cfd6f3;
+      --accent: #6da8ff;
+      --accent2: #33d6a6;
+      --border: #232a49;
+      --warn: #ffd166;
+
+      --h1: clamp(36px, 4vw, 56px);
+      --h2: clamp(24px, 3vw, 34px);
+      --h3: clamp(18px, 2.2vw, 22px);
+      --body: 16px;
+      --small: 14px;
+
+      --sp-1: 10px;
+      --sp-2: 14px;
+      --sp-3: 22px;
+      --sp-4: 32px;
+      --sp-5: 48px;
+
+      --radius: 18px;
+      --shadow: 0 12px 30px rgba(0,0,0,.28);
+      --topbar-h: 64px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin:0; padding:0;
+      background:var(--bg); color:var(--ink);
+      font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Inter, system-ui, Arial;
+      font-size: var(--body);
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img, svg { display:block; max-width:100%; height:auto; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1,h2,h3,p,ul,ol { margin:0; }
+    p + p { margin-top: 10px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    /* Evitar solapes y cortes de palabras */
+    h1,h2,h3,.title,.desc,blockquote,.btn,nav a {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* ====== Topbar (con offset real para evitar solapes al hacer anchor) ====== */
+    .topbar {
+      position: sticky; top:0; z-index: 30;
+      height: var(--topbar-h);
+      backdrop-filter: blur(8px);
+      background: rgba(11,15,30,.82);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .wrap {
+      height: 100%;
+      display:flex; align-items:center; justify-content: space-between;
+      gap: 12px;
+    }
+    .brand { display:flex; gap:12px; align-items:center; min-width: 0; }
+    .logo-badge {
+      flex:0 0 auto;
+      width:46px; height:46px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border-radius: 12px; display:grid; place-items:center; box-shadow: var(--shadow);
+    }
+    .logo-badge svg { width:28px; height:28px; }
+    .brand-name { font-weight: 700; white-space: nowrap; }
+    .nav { display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+    .nav a { color: var(--ink); opacity:.92; font-size: var(--small); padding:6px 8px; border-radius:8px; }
+    .nav a:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .cta {
+      display:inline-flex; align-items:center; gap:8px;
+      background: var(--accent); color:#0b0f1e; padding:8px 12px;
+      border-radius: 999px; font-weight:600; border:0; text-decoration:none;
+      box-shadow: 0 4px 10px rgba(109,168,255,.25);
+    }
+    .cta svg { width:16px; height:16px; }
+    /* Offset para que los anchors no queden ocultos por la topbar */
+    section { scroll-margin-top: calc(var(--topbar-h) + 16px); margin: var(--sp-5) 0; }
+    /* Espacio bajo la topbar para el hero inicial (evita solape) */
+    .spacer-top { height: var(--topbar-h); }
+
+    /* ====== Hero ====== */
+    header.hero { padding: var(--sp-5) 0 var(--sp-4); }
+    header.hero h1 { font-size: var(--h1); line-height: 1.1; }
+    .lead { color: var(--lead); margin-top: 8px; max-width: 70ch; }
+    .chips { display:flex; gap:8px; flex-wrap:wrap; margin-top: var(--sp-2);}
+    .chip { background: #1a2142; border:1px solid var(--border); color: var(--muted); padding:6px 10px; font-size: var(--small); border-radius: 999px; }
+
+    /* ====== Grid ====== */
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--sp-3); }
+
+    /* ====== Cards ====== */
+    .card { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow); }
+    .thumb { min-height: 210px; background: linear-gradient(135deg,#1a2142,#121735); position:relative; }
+    .pill {
+      position:absolute; top:10px; left:10px;
+      display:inline-block; background: rgba(0,0,0,.35); color:#fff;
+      padding:6px 10px; border:1px solid rgba(255,255,255,.15); border-radius:999px;
+      font-size: var(--small); backdrop-filter: blur(6px);
+    }
+    .body { padding:18px 18px 16px; }
+    .kicker { text-transform: uppercase; color: var(--muted); font-size: var(--small); letter-spacing: .4px; margin:0 0 6px; }
+    .title { font-size: var(--h3); margin:0 0 8px; line-height: 1.3; }
+    .desc { color: var(--lead); margin: 0 0 12px; }
+    blockquote { margin: 10px 0 12px; padding: 10px 12px; border-left: 3px solid var(--accent); background: #1b2244; color:#e5e9ff; border-radius:10px; font-style: italic; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      background:#1d2445; border:1px solid var(--border); color:#e9edff; padding:8px 12px; border-radius:10px; font-size: var(--small);
+      text-decoration:none;
+    }
+    .btn svg { width:16px; height:16px; }
+    .meta { display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; color: var(--muted); font-size: var(--small);}
+
+    /* ====== Footer ====== */
+    footer.site { margin: var(--sp-5) 0 var(--sp-5); padding-top: var(--sp-4); border-top:1px dashed var(--border); color: var(--muted); }
+    .cols { display:grid; grid-template-columns: 1.2fr .8fr; gap: var(--sp-3); }
+    @media (max-width: 820px) { .cols { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <!-- Sticky top bar with internal nav and LinkedIn -->
+  <div class="topbar" role="navigation" aria-label="Capital.IA">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 12c0-4.418 3.582-8 8-8 3.866 0 7.098 2.744 7.846 6.39.1.48-.265.94-.755.94H12a2 2 0 0 0-2 2v7.091c0 .49-.46.855-.94.755A8.002 8.002 0 0 1 4 12Z" fill="#0b0f1e"/>
+          </svg>
+        </div>
+        <strong class="brand-name">Capital.IA</strong>
+      </div>
+      <nav class="nav">
+        <a href="#ia-ciencia">IA & Ciencia</a>
+        <a href="#productos">Productos</a>
+        <a href="#finanzas-tech">Finanzas & Tech</a>
+        <a href="#cripto">Cripto & Web3</a>
+        <a class="cta" href="https://www.linkedin.com/in/ottavianof/" target="_blank" rel="noopener" aria-label="LinkedIn de Franco">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zM8 8h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-5.86c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V23H8V8z" fill="#0b0f1e"/></svg>
+          LinkedIn
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Compensa la altura de la topbar para evitar solape con el hero -->
+  <div class="spacer-top" aria-hidden="true"></div>
+
+  <header class="hero" id="inicio">
+    <div class="wrap">
+      <h1>Capital.IA · Semana al 2025-09-22</h1>
+      <p class="lead">Revista semanal neutral y profesional con análisis extendido, imágenes, botones de acceso a fuentes y navegación por secciones.</p>
+      <div class="chips">
+        <span class="chip">IA & Ciencia</span><span class="chip">Productos</span><span class="chip">Finanzas</span><span class="chip">Cripto</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- IA & Ciencia -->
+    <section id="ia-ciencia" aria-labelledby="h-ia">
+      <h2 id="h-ia">IA & Ciencia</h2>
+      <div class="grid">
+        <!-- Nota 1 -->
+        <article class="card" id="nota-openai">
+          <div class="thumb" role="img" aria-label="Ilustración de círculos representando modelos">
+            <span class="pill">Modelos</span>
+            <svg viewBox="0 0 900 210" preserveAspectRatio="none" aria-hidden="true">
+              <rect width="900" height="210" fill="#1a2142"/>
+              <g>
+                <circle cx="140" cy="105" r="28" fill="#6da8ff"/>
+                <circle cx="320" cy="105" r="28" fill="#33d6a6"/>
+                <circle cx="500" cy="105" r="28" fill="#6da8ff"/>
+                <circle cx="680" cy="105" r="28" fill="#33d6a6"/>
+              </g>
+              <text x="24" y="36" fill="#aab1ff" font-size="18">OpenAI · Notas de modelo</text>
+              <text x="24" y="184" fill="#e9edff" font-size="22">Actualización Model Spec y GPT‑5</text>
+            </svg>
+          </div>
+          <div class="body">
+            <p class="kicker">15–18 Sep 2025</p>
+            <h3 class="title">Actualizaciones de modelos y especificación: más claridad para integraciones</h3>
+            <p class="desc">OpenAI publicó cambios en su <em>Model Spec</em> y notas de lanzamiento que aclaran comportamientos esperados, prioridades y límites de seguridad a medida que los modelos evolucionan hacia usos más “agénticos”. Para equipos de datos y producto, esto reduce ambigüedades al implementar asistentes con acciones, al definir permisos y al testear regresiones. Entre las notas de septiembre destacan mejoras en <strong>GPT‑5</strong> y en herramientas para desarrolladores. Para adopción corporativa, el beneficio inmediato es la estabilidad contractual y técnica al integrar SDKs con cambios frecuentes.</p>
+            <blockquote>“La guía viva del Model Spec se expande con reglas sobre autoridad, prioridades y seguridad en experiencias más autónomas.”</blockquote>
+            <div class="actions">
+              <a class="btn" href="https://help.openai.com/en/articles/9624314-model-release-notes" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Notas de modelo (OpenAI)
+              </a>
+              <a class="btn" href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Changelog ChatGPT
+              </a>
+            </div>
+            <div class="meta"><span>Fuente oficial</span><span>Implementación Dev</span></div>
+          </div>
+        </article>
+
+        <!-- Nota 2 -->
+        <article class="card" id="nota-meta">
+          <div class="thumb" role="img" aria-label="Gafas con IA ilustradas por curvas y puntos">
+            <span class="pill">Embebida / Wearables</span>
+            <svg viewBox="0 0 900 210" preserveAspectRatio="none" aria-hidden="true">
+              <rect width="900" height="210" fill="#17203e"/>
+              <g stroke="#6da8ff" stroke-width="4" fill="none">
+                <path d="M140,120 q80,-60 160,0 q80,60 160,0 q80,-60 160,0 q80,60 160,0" />
+              </g>
+              <g fill="#33d6a6"><circle cx="300" cy="120" r="14"/><circle cx="620" cy="120" r="14"/></g>
+              <text x="24" y="36" fill="#aab1ff" font-size="18">Meta Connect 2025</text>
+              <text x="24" y="184" fill="#e9edff" font-size="22">Gafas con IA y demos de sistema</text>
+            </svg>
+          </div>
+          <div class="body">
+            <p class="kicker">17–21 Sep 2025</p>
+            <h3 class="title">Gafas con IA: HUD discreto, control gestual y soporte de Meta AI</h3>
+            <p class="desc">Meta mostró nuevas iteraciones de gafas inteligentes con display integrado y soporte de asistentes contextuales. Las demos apuntan a interacción manos libres: traducción, notificaciones y consultas a IA sin sacar el teléfono. Más allá del “gadget”, la tendencia es una capa de IA en el borde que reduce latencia y mejora privacidad. Las lecciones en demos en vivo subrayan el reto de orquestar sensores, red y modelos en tiempo real. El foco para consumo: autonomía de batería y claridad de casos de uso.</p>
+            <blockquote>“La IA embebida progresa de ‘demo’ a casos cotidianos, pero la batería y robustez siguen siendo el cuello de botella.”</blockquote>
+            <div class="actions">
+              <a class="btn" href="https://www.uploadvr.com/meta-connect-2025-roundup/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Resumen (UploadVR)
+              </a>
+              <a class="btn" href="https://iafrica.com/ai-display-glasses-debut-at-meta-connect-2025/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Cobertura (iAfrica)
+              </a>
+            </div>
+            <div class="meta"><span>Wearables</span><span>Edge AI</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Productos & Plataformas -->
+    <section id="productos" aria-labelledby="h-prod">
+      <h2 id="h-prod">Productos & Plataformas</h2>
+      <div class="grid">
+        <article class="card" id="nota-windows">
+          <div class="thumb" role="img" aria-label="Ventana de explorador con líneas representando IA">
+            <span class="pill">Windows & Copilot</span>
+            <svg viewBox="0 0 900 210" preserveAspectRatio="none" aria-hidden="true">
+              <rect width="900" height="210" fill="#161d3a"/>
+              <g stroke="#33d6a6" stroke-width="3" fill="none">
+                <rect x="110" y="64" width="680" height="116" rx="12"/>
+                <line x1="140" y1="100" x2="740" y2="100"/>
+                <line x1="140" y1="140" x2="560" y2="140"/>
+              </g>
+              <text x="24" y="36" fill="#aab1ff" font-size="18">Insider Build 26120.6690</text>
+              <text x="24" y="184" fill="#e9edff" font-size="22">Acciones de IA en el Explorador</text>
+            </svg>
+          </div>
+          <div class="body">
+            <p class="kicker">19 Sep 2025</p>
+            <h3 class="title">“Ask Copilot” y acciones inteligentes sobre archivos</h3>
+            <p class="desc">Microsoft liberó la build 26120.6690 (Beta) con acciones de IA integradas en el Explorador: consultas a Copilot sobre archivos, resúmenes, traducciones y pasos automáticos sin abrir documentos; parte de las funciones se apoyan en capacidades locales en equipos Copilot+. El despliegue está controlado por “feature toggles” y llega de forma gradual en canales Insider. En analítica diaria, la ventaja es reducir el cambio de contexto y documentar automáticamente transformaciones realizadas por el asistente.</p>
+            <blockquote>“La IA pasa de ser una app a una capa del SO con contexto de archivos y permisos.”</blockquote>
+            <div class="actions">
+              <a class="btn" href="https://blogs.windows.com/windows-insider/2025/09/19/announcing-windows-11-insider-preview-build-26120-6690-beta-channel/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Blog oficial (Windows)
+              </a>
+              <a class="btn" href="https://windowsforum.com/threads/windows-11-insider-preview-your-accounts-and-copilot-integrations-in-build-26220-6690-26120-6690.381538/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Detalles (WindowsForum)
+              </a>
+            </div>
+            <div class="meta"><span>SO & Productividad</span><span>Canal Beta</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Finanzas & Tech -->
+    <section id="finanzas-tech" aria-labelledby="h-fin">
+      <h2 id="h-fin">Finanzas & Tech</h2>
+      <div class="grid">
+        <article class="card" id="nota-nvda-oai">
+          <div class="thumb" role="img" aria-label="Línea ascendente representando inversión">
+            <span class="pill">Mercados & Infra</span>
+            <svg viewBox="0 0 900 210" preserveAspectRatio="none" aria-hidden="true">
+              <rect width="900" height="210" fill="#151d36"/>
+              <polyline points="40,170 160,130 280,150 400,100 520,120 640,90 760,110 860,80" fill="none" stroke="#ffd166" stroke-width="4"/>
+              <text x="24" y="36" fill="#aab1ff" font-size="18">Inversión estratégica</text>
+              <text x="24" y="184" fill="#e9edff" font-size="22">Nvidia compromete hasta $100B en OpenAI</text>
+            </svg>
+          </div>
+          <div class="body">
+            <p class="kicker">22 Sep 2025</p>
+            <h3 class="title">Alianza masiva para construir centros de datos de IA de próxima generación</h3>
+            <p class="desc">Nvidia anunció planes para invertir hasta <strong>USD 100.000 millones</strong> en OpenAI, acompañando un despliegue de al menos 10 GW de cómputo con la próxima plataforma “Vera Rubin”. El objetivo: acelerar la infraestructura para modelos avanzados a partir de 2026. El acuerdo prevé compras de millones de procesadores de IA y contempla participación accionaria progresiva. En mercados, la noticia refuerza la visibilidad de ingresos de semiconductores y socios de data center, y sugiere tensiones por energía y redes ópticas. Para empresas usuarias, la señal clave es capacidad futura y costos de inferencia a escala.</p>
+            <blockquote>“El futuro de la economía estará definido por la disponibilidad de cómputo de IA.”</blockquote>
+            <div class="actions">
+              <a class="btn" href="https://www.reuters.com/business/nvidia-invest-100-billion-openai-2025-09-22/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Reuters
+              </a>
+              <a class="btn" href="https://www.ft.com/content/d3caeac1-def8-45ae-b56b-e34c7c435ccc" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Financial Times
+              </a>
+              <a class="btn" href="https://www.businessinsider.com/nvidia-investing-up-to-100-billion-openai-ai-deal-2025-9" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Business Insider
+              </a>
+            </div>
+            <div class="meta"><span>Capex & Infra</span><span>Mercados globales</span></div>
+          </div>
+        </article>
+
+        <article class="card" id="nota-dc-capex">
+          <div class="thumb" role="img" aria-label="Curva de construcción de centros de datos">
+            <span class="pill">Tendencias</span>
+            <svg viewBox="0 0 900 210" preserveAspectRatio="none" aria-hidden="true">
+              <rect width="900" height="210" fill="#111a36"/>
+              <g stroke="#6da8ff" stroke-width="3" fill="none">
+                <path d="M60,160 C160,120 260,150 360,110 460,130 560,100 660,120 760,90 840,110 860,100"/>
+              </g>
+              <text x="24" y="36" fill="#aab1ff" font-size="18">Construcción de DCs</text>
+              <text x="24" y="184" fill="#e9edff" font-size="22">Gasto récord impulsado por IA</text>
+            </svg>
+          </div>
+          <div class="body">
+            <p class="kicker">Panorama</p>
+            <h3 class="title">Boom de data centers: récord de inversión y presión en la cadena de suministro</h3>
+            <p class="desc">Reportes recientes destacan construcción y gasto en centros de datos en máximos, con hiperescaladores asegurando contratos multi‑año para CPU/GPU, memoria y almacenamiento. El efecto dominó llega a equipos de litografía, redes ópticas y energía. Para estrategia financiera, la lectura es doble: altos capex sostienen ingresos del ecosistema, pero elevan riesgos de concentración de proveedores y cuellos de botella regulatorios/energéticos. Para CTOs, conviene diversificar regiones, comprometer capacidad con cláusulas de energía renovable y evaluar TCO de inferencia on‑prem vs. nube.</p>
+            <blockquote>“Los contratos de largo plazo de hiperescaladores marcan el pulso de la oferta en semis.”</blockquote>
+            <div class="actions">
+              <a class="btn" href="https://www.reuters.com/business/us-data-center-build-hits-record-ai-demand-surges-bank-america-institute-says-2025-09-10/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Reuters (tendencia)
+              </a>
+              <a class="btn" href="https://www.fusionww.com/insights/resources/the-cost-of-ai-how-hyperscaler-spending-is-impacting-semiconductor-supply" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Cadena de suministro
+              </a>
+            </div>
+            <div class="meta"><span>Infraestructura</span><span>Supply chain</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Cripto & Web3 -->
+    <section id="cripto" aria-labelledby="h-cripto">
+      <h2 id="h-cripto">Cripto & Web3</h2>
+      <div class="grid">
+        <article class="card" id="nota-cripto-ai">
+          <div class="thumb" role="img" aria-label="Círculos representando tokens de IA">
+            <span class="pill">Mercado</span>
+            <svg viewBox="0 0 900 210" preserveAspectRatio="none" aria-hidden="true">
+              <rect width="900" height="210" fill="#101834"/>
+              <g>
+                <circle cx="160" cy="110" r="26" fill="#6da8ff"/>
+                <circle cx="320" cy="110" r="26" fill="#33d6a6"/>
+                <circle cx="480" cy="110" r="26" fill="#ffd166"/>
+                <circle cx="640" cy="110" r="26" fill="#6da8ff"/>
+              </g>
+              <text x="24" y="36" fill="#aab1ff" font-size="18">Tokens de IA</text>
+              <text x="24" y="184" fill="#e9edff" font-size="22">Narrativa y riesgos</text>
+            </svg>
+          </div>
+          <div class="body">
+            <p class="kicker">Últimos 7–10 días</p>
+            <h3 class="title">Tokens vinculados a IA: volumen al alza, foco en utilidad real</h3>
+            <p class="desc">Sigue el interés por tokens asociados a infraestructura y agentes de IA. Los movimientos más sanos provienen de proyectos con métricas de uso (transacciones, suscripciones, horas de GPU adquiridas), por encima de listados especulativos. Para gestión de riesgo, mirar desbloqueos de tokens, liquidez de mercado y dependencia off‑chain. En el corto plazo, la narrativa de IA y eventos regionales mantiene el flujo, pero la sostenibilidad depende de puentes robustos entre blockchain y cómputo real.</p>
+            <blockquote>“La señal clave es adopción: menos hype, más uso medible.”</blockquote>
+            <div class="actions">
+              <a class="btn" href="https://blockchainreporter.net/septembers-weekly-token-unlocks-bring-190m-supply-surge-across-top-projects/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Calendario de unlocks
+              </a>
+              <a class="btn" href="https://pintu.co.id/en/news/208633-5-ai-agent-tokens-with-the-highest-price-increase-according-to-chatgpt" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M5 12v7h7" stroke="currentColor" stroke-width="2" /></svg>
+                Resumen de mercado
+              </a>
+            </div>
+            <div class="meta"><span>Riesgos</span><span>On‑chain vs Off‑chain</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site" role="contentinfo">
+    <div class="wrap cols">
+      <div>
+        <p><strong>Capital.IA</strong> — publicación semanal con titulares H3 y cuerpo uniforme (16px). Citas, botones a fuentes y navegación accesible. Optimizada para carga rápida y sin solapes visuales.</p>
+        <p class="muted">© 2025 Capital.IA · Edición 2025-09-22</p>
+      </div>
+      <div>
+        <p class="muted">Contacto editorial · <a href="https://www.linkedin.com/in/ottavianof/" target="_blank" rel="noopener">LinkedIn</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
